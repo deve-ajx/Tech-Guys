@@ -1,0 +1,1235 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tech Guys - Learn Programming & Cybersecurity</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(90deg, #3b82f6, #10b981);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .chatbot-container {
+            transition: all 0.3s ease;
+            transform: translateY(20px);
+            opacity: 0;
+        }
+        
+        .chatbot-container.active {
+            transform: translateY(0);
+            opacity: 1;
+        }
+        
+        .chat-message {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+        }
+        
+        .chat-message.active {
+            max-height: 200px;
+        }
+        
+        .course-content {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: white;
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 2rem;
+        }
+        
+        .code-block {
+            background-color: #f8f8f8;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-family: 'Courier New', monospace;
+            border-radius: 0 4px 4px 0;
+            overflow-x: auto;
+        }
+        
+        .note-box {
+            background-color: #f0f9ff;
+            border-left: 4px solid #3b82f6;
+            padding: 1rem;
+            margin: 1rem 0;
+            border-radius: 0 4px 4px 0;
+        }
+        
+        .close-btn {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+        
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-md sticky top-0 z-50">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">Tech Guys</a>
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="text-gray-700 hover:text-blue-600 transition">Home</a>
+                <a href="#python" class="text-gray-700 hover:text-blue-600 transition">Python</a>
+                <a href="#cyber" class="text-gray-700 hover:text-blue-600 transition">Cybersecurity</a>
+                <a href="#ai" class="text-gray-700 hover:text-blue-600 transition">AI Chat</a>
+            </div>
+            <button class="md:hidden text-gray-700" id="mobile-menu-button">
+                <i class="fas fa-bars text-2xl"></i>
+            </button>
+        </div>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden bg-white w-full px-4 py-2" id="mobile-menu">
+            <a href="#home" class="block py-2 text-gray-700 hover:text-blue-600 transition">Home</a>
+            <a href="#python" class="block py-2 text-gray-700 hover:text-blue-600 transition">Python</a>
+            <a href="#cyber" class="block py-2 text-gray-700 hover:text-blue-600 transition">Cybersecurity</a>
+            <a href="#ai" class="block py-2 text-gray-700 hover:text-blue-600 transition">AI Chat</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="py-20 px-4">
+        <div class="container mx-auto flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0">
+                <h1 class="text-4xl md:text-5xl font-bold mb-6">Learn <span class="gradient-text">Tech Skills</span> From Zero to Hero</h1>
+                <p class="text-gray-600 mb-8 text-lg">Master Python programming and cybersecurity with our comprehensive courses designed for beginners and advanced learners alike.</p>
+                <div class="flex space-x-4">
+                    <a href="#python" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">Start Learning</a>
+                    <a href="#ai" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-lg font-medium transition">Ask AI</a>
+                </div>
+            </div>
+            <div class="md:w-1/2 flex justify-center">
+                <img src="https://images.unsplash.com/photo-1551033406-611cf9a28f67?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=687&q=80" alt="Coding illustration" class="rounded-xl shadow-xl w-full max-w-md">
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12">Why Learn With <span class="gradient-text">Tech Guys</span></h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-blue-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-laptop-code text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Hands-on Projects</h3>
+                    <p class="text-gray-600">Learn by building real-world applications and solving practical problems.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-green-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-shield-alt text-green-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Cybersecurity Focus</h3>
+                    <p class="text-gray-600">Learn how to build secure applications and protect systems from threats.</p>
+                </div>
+                <div class="bg-gray-50 p-6 rounded-xl shadow-sm hover:shadow-md transition">
+                    <div class="w-14 h-14 bg-purple-100 rounded-full flex items-center justify-center mb-4">
+                        <i class="fas fa-user-graduate text-purple-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold mb-2">Beginner Friendly</h3>
+                    <p class="text-gray-600">No prior experience needed. We start from absolute basics.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Python Section -->
+    <section id="python" class="py-20 px-4 bg-gray-50">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2"><span class="gradient-text">Python</span> Programming</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">From basic syntax to advanced concepts like machine learning and web development.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Course Card 1 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-blue-100 flex items-center justify-center">
+                        <i class="fas fa-bolt text-blue-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Python Basics</h3>
+                        <p class="text-gray-600 mb-4">Learn variables, loops, functions and other fundamental concepts.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">12 lessons</span>
+                            <button onclick="showCourse('python-basics')" class="text-blue-600 hover:text-blue-800 font-medium">Start Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 2 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-green-100 flex items-center justify-center">
+                        <i class="fas fa-globe text-green-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Web Development</h3>
+                        <p class="text-gray-600 mb-4">Build websites with Django and Flask frameworks.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">18 lessons</span>
+                            <button onclick="showCourse('web-development')" class="text-blue-600 hover:text-blue-800 font-medium">Start Now</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Course Card 3 -->
+                <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-lg transition">
+                    <div class="h-48 bg-purple-100 flex items-center justify-center">
+                        <i class="fas fa-brain text-purple-600 text-6xl"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-semibold mb-2">Data Science</h3>
+                        <p class="text-gray-600 mb-4">Master NumPy, Pandas, and machine learning with Python.</p>
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-500">24 lessons</span>
+                            <button onclick="showCourse('data-science')" class="text-blue-600 hover:text-blue-800 font-medium">Start Now</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cybersecurity Section -->
+    <section id="cyber" class="py-20 px-4 bg-white">
+        <div class="container mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2"><span class="gradient-text">Cybersecurity</span> Essentials</h2>
+                <p class="text-gray-600 max-w-2xl mx-auto">Learn how to protect systems, networks, and data from digital attacks.</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Left Column -->
+                <div>
+                    <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-lock text-blue-600 mr-3"></i> Beginner Track
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Introduction to Cybersecurity</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Password Security & Management</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Phishing Awareness</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Basic Network Security</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-shield-alt text-purple-600 mr-3"></i> Tools You'll Learn
+                        </h3>
+                        <div class="flex flex-wrap gap-2">
+                            <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Wireshark</span>
+                            <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">Nmap</span>
+                            <span class="bg-yellow-100 text-yellow-800 px-3 py-1 rounded-full text-sm">Metasploit</span>
+                            <span class="bg-red-100 text-red-800 px-3 py-1 rounded-full text-sm">Burp Suite</span>
+                            <span class="bg-purple-100 text-purple-800 px-3 py-1 rounded-full text-sm">Kali Linux</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Column -->
+                <div>
+                    <div class="bg-gray-50 p-6 rounded-xl mb-6">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-user-secret text-red-600 mr-3"></i> Advanced Track
+                        </h3>
+                        <ul class="space-y-3">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Ethical Hacking Techniques</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Penetration Testing</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Cryptography Fundamentals</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-green-500 mt-1 mr-2"></i>
+                                <span>Secure Coding Practices</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-gray-50 p-6 rounded-xl">
+                        <h3 class="text-xl font-semibold mb-4 flex items-center">
+                            <i class="fas fa-certificate text-yellow-600 mr-3"></i> Certifications
+                        </h3>
+                        <p class="text-gray-600 mb-4">Prepare for industry-recognized certifications:</p>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2"></i>
+                                <span>CompTIA Security+</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2"></i>
+                                <span>CEH (Certified Ethical Hacker)</span>
+                            </div>
+                            <div class="flex items-center">
+                                <i class="fas fa-arrow-right text-blue-500 mr-2"></i>
+                                <span>OSCP (Offensive Security Certified Professional)</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 text-center">
+                <button onclick="showCourse('cybersecurity')" class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-lg font-medium transition">Start Cybersecurity Course</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- AI Chat Section -->
+    <section id="ai" class="py-20 px-4 bg-gray-50">
+        <div class="container mx-auto max-w-4xl">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-2">Tech <span class="gradient-text">Assistant</span></h2>
+                <p class="text-gray-600">Ask our AI assistant about tech careers and learning paths.</p>
+            </div>
+            
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                <div class="bg-blue-600 text-white p-4 flex items-center">
+                    <div class="w-10 h-10 rounded-full bg-blue-500 flex items-center justify-center mr-3">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold">Tech Assistant</h3>
+                        <p class="text-xs opacity-80">AI-powered guidance</p>
+                    </div>
+                </div>
+                
+                <div class="p-6">
+                    <div class="chatbot-container" id="chatbot">
+                        <div class="space-y-4 mb-6" id="chat-messages">
+                            <div class="flex">
+                                <div class="bg-blue-100 rounded-lg p-3 max-w-xs md:max-w-md">
+                                    <p>Hello! I can answer questions about becoming a developer or about this website. Try asking:</p>
+                                    <ul class="list-disc pl-5 mt-2 space-y-1">
+                                        <li>What type of person is suitable for becoming a developer?</li>
+                                        <li>Who developed this website?</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="flex space-x-2">
+                            <button onclick="askQuestion('developer')" class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg text-sm transition">Ask about developers</button>
+                            <button onclick="askQuestion('website')" class="border border-blue-600 text-blue-600 hover:bg-blue-50 px-4 py-2 rounded-lg text-sm transition">Ask about this site</button>
+                        </div>
+                    </div>
+                    
+                    <div id="developer-response" class="chat-message">
+                        <div class="flex justify-end mb-4">
+                            <div class="bg-gray-200 rounded-lg p-3 max-w-xs md:max-w-md">
+                                <p>What type of person is suitable for becoming a developer?</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-blue-100 rounded-lg p-3 max-w-xs md:max-w-md">
+                                <p>A thinker, a solver, and a patient person.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div id="website-response" class="chat-message">
+                        <div class="flex justify-end mb-4">
+                            <div class="bg-gray-200 rounded-lg p-3 max-w-xs md:max-w-md">
+                                <p>Who developed this website?</p>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="bg-blue-100 rounded-lg p-3 max-w-xs md:max-w-md">
+                                <p>This website was created by a passionate tech student. Instagram: <a href="https://www.instagram.com/ali_em_aji__/" class="text-blue-600 hover:underline" target="_blank">@ali_em_aji__</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="py-16 bg-blue-600 text-white">
+        <div class="container mx-auto px-4 text-center">
+            <h2 class="text-3xl font-bold mb-4">Stay Updated</h2>
+            <p class="mb-8 max-w-2xl mx-auto">Subscribe to our newsletter for new course announcements and tech tips.</p>
+            <form class="max-w-md mx-auto flex">
+                <input type="email" placeholder="Your email address" class="flex-grow px-4 py-3 rounded-l-lg focus:outline-none text-gray-800">
+                <button type="submit" class="bg-blue-800 hover:bg-blue-900 px-6 py-3 rounded-r-lg font-medium transition">Subscribe</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-12 px-4">
+        <div class="container mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 gradient-text">Tech Guys</h3>
+                    <p class="text-gray-400">Empowering the next generation of developers and cybersecurity professionals.</p>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Courses</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#python" class="text-gray-400 hover:text-white transition">Python Programming</a></li>
+                        <li><a href="#cyber" class="text-gray-400 hover:text-white transition">Cybersecurity</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Web Development</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Data Science</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Resources</h4>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Blog</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Documentation</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition">Community</a></li>
+                        <li><a href="#ai" class="text-gray-400 hover:text-white transition">Tech Assistant</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="font-semibold mb-4">Connect</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center">
+                            <i class="fab fa-instagram mr-2 text-gray-400"></i>
+                            <a href="https://www.instagram.com/ali_em_aji__/" class="text-gray-400 hover:text-white transition" target="_blank">@ali_em_aji__</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-2 text-gray-400"></i>
+                            <a href="mailto:aliemaji01@gmail.com" class="text-gray-400 hover:text-white transition">aliemaji01@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2023 Tech Guys. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Course Content Pages -->
+    <div id="python-basics" class="course-content">
+        <button class="close-btn" onclick="hideCourse('python-basics')"><i class="fas fa-times"></i></button>
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-6 gradient-text">Python Programming</h1>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 1: What Is Python?</h2>
+                <p>Python is a modern programming language used in almost every tech field: web development, artificial intelligence, automation, cybersecurity, and data science.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">✳️ Why Choose Python?</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Beginner-friendly: easy to read and write</li>
+                    <li>Popular: used by Google, Instagram, Netflix, NASA</li>
+                    <li>Powerful: supports AI, data science, and web apps</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">✅ Your First Python Program:</h3>
+                <div class="code-block">
+                    <p>print("Hello, world!")</p>
+                </div>
+                <p>This tells the computer to display: <strong>Hello, world!</strong></p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🔍 What Just Happened?</h3>
+                <p>The print() function is used to show output on the screen.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 2: Setting Up Python</h2>
+                <h3 class="text-xl font-semibold mb-2">📥 Installing Python</h3>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Go to <a href="https://python.org" class="text-blue-600 hover:underline" target="_blank">https://python.org</a></li>
+                    <li>Download and install the latest version</li>
+                    <li>Make sure to check: ✅ "Add Python to PATH"</li>
+                </ol>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🖥️ Test It:</h3>
+                <p>Open terminal or command prompt and type:</p>
+                <div class="code-block">
+                    <p>python</p>
+                </div>
+                <p>Then type:</p>
+                <div class="code-block">
+                    <p>print(2 + 2)</p>
+                </div>
+                <p>If it returns <strong>4</strong>, you're ready!</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 3: Variables and Data Types</h2>
+                <p>Variables store data.</p>
+                <div class="code-block">
+                    <p>name = "Ali"</p>
+                    <p>age = 20</p>
+                    <p>is_coder = True</p>
+                </div>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>name</strong> is a string</li>
+                    <li><strong>age</strong> is a number (integer)</li>
+                    <li><strong>is_coder</strong> is a boolean (True/False)</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">📌 Try it:</h3>
+                <div class="code-block">
+                    <p>print("Name:", name)</p>
+                    <p>print("Age:", age)</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 4: Input and Output</h2>
+                <div class="code-block">
+                    <p>your_name = input("What is your name? ")</p>
+                    <p>print("Hello", your_name)</p>
+                </div>
+                <p>This asks the user for input and prints a greeting.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 5: Conditions (if...else)</h2>
+                <div class="code-block">
+                    <p>age = int(input("Enter your age: "))</p>
+                    <p>if age >= 18:</p>
+                    <p class="ml-4">print("You are an adult.")</p>
+                    <p>else:</p>
+                    <p class="ml-4">print("You are a minor.")</p>
+                </div>
+                <h3 class="text-xl font-semibold mt-4 mb-2">💡 Explanation:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>if</strong> checks a condition.</li>
+                    <li><strong>else</strong> runs if the condition is false.</li>
+                    <li><strong>int()</strong> turns input into a number.</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 6: Loops</h2>
+                <h3 class="text-xl font-semibold mb-2">➰ for loop</h3>
+                <div class="code-block">
+                    <p>for i in range(5):</p>
+                    <p class="ml-4">print("This is line", i)</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🔁 while loop</h3>
+                <div class="code-block">
+                    <p>count = 0</p>
+                    <p>while count < 3:</p>
+                    <p class="ml-4">print("Repeating...", count)</p>
+                    <p class="ml-4">count += 1</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 7: Functions</h2>
+                <div class="code-block">
+                    <p>def greet(name):</p>
+                    <p class="ml-4">print("Hello,", name)</p>
+                    <p>greet("Ali")</p>
+                    <p>greet("Aisha")</p>
+                </div>
+                <p>Functions allow you to organize and reuse your code.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 8: Lists and Loops</h2>
+                <div class="code-block">
+                    <p>fruits = ["apple", "banana", "mango"]</p>
+                    <p>for fruit in fruits:</p>
+                    <p class="ml-4">print("I like", fruit)</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 9: Dictionaries</h2>
+                <div class="code-block">
+                    <p>person = {"name": "Ali", "age": 20, "coder": True}</p>
+                    <p>print(person["name"])</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 10: Final Python Practice</h2>
+                <p>Create a small app that:</p>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Asks for your name</li>
+                    <li>Asks for your age</li>
+                    <li>Tells you if you're allowed to drive (age ≥ 18)</li>
+                    <li>Greets you with a message</li>
+                </ol>
+                
+                <div class="code-block">
+                    <p>name = input("Your name: ")</p>
+                    <p>age = int(input("Your age: "))</p>
+                    <p>if age >= 18:</p>
+                    <p class="ml-4">print("Hello", name + "! You can drive.")</p>
+                    <p>else:</p>
+                    <p class="ml-4">print("Hi", name + "! You are too young to drive.")</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="web-development" class="course-content">
+        <button class="close-btn" onclick="hideCourse('web-development')"><i class="fas fa-times"></i></button>
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-6 gradient-text">Web Development</h1>
+            <p class="text-xl mb-8">HTML, CSS, JavaScript — From Zero to Website Builder</p>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 1: What is Web Development?</h2>
+                <p>Web development is the process of building websites and web applications. It includes:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Frontend</strong> (what users see): HTML, CSS, JavaScript</li>
+                    <li><strong>Backend</strong> (what happens behind the scenes): Python (Django/Flask), databases</li>
+                </ul>
+                <p class="mt-2">In this part, we'll focus on Frontend Development first.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 2: HTML – The Structure of a Web Page</h2>
+                <p>HTML stands for HyperText Markup Language. It builds the skeleton of every web page.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">📄 Basic HTML Page:</h3>
+                <div class="code-block">
+                    <p>&lt;!DOCTYPE html&gt;</p>
+                    <p>&lt;html&gt;</p>
+                    <p>&lt;head&gt;</p>
+                    <p class="ml-4">&lt;title&gt;My First Web Page&lt;/title&gt;</p>
+                    <p>&lt;/head&gt;</p>
+                    <p>&lt;body&gt;</p>
+                    <p class="ml-4">&lt;h1&gt;Hello, World!&lt;/h1&gt;</p>
+                    <p class="ml-4">&lt;p&gt;Welcome to my first website.&lt;/p&gt;</p>
+                    <p>&lt;/body&gt;</p>
+                    <p>&lt;/html&gt;</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🔍 Key Tags:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>&lt;h1&gt;</strong> to <strong>&lt;h6&gt;</strong>: Headings</li>
+                    <li><strong>&lt;p&gt;</strong>: Paragraph</li>
+                    <li><strong>&lt;a href="URL"&gt;</strong>: Link</li>
+                    <li><strong>&lt;img src="image.jpg"&gt;</strong>: Image</li>
+                    <li><strong>&lt;ul&gt;</strong>, <strong>&lt;ol&gt;</strong>, <strong>&lt;li&gt;</strong>: Lists</li>
+                    <li><strong>&lt;div&gt;</strong>, <strong>&lt;span&gt;</strong>: Layout containers</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 3: CSS – Styling Your Web Page</h2>
+                <p>CSS (Cascading Style Sheets) adds style to HTML.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🎨 Example:</h3>
+                <div class="code-block">
+                    <p>&lt;style&gt;</p>
+                    <p>body {</p>
+                    <p class="ml-4">background-color: #f0f0f0;</p>
+                    <p class="ml-4">font-family: Arial;</p>
+                    <p>}</p>
+                    <p>h1 {</p>
+                    <p class="ml-4">color: blue;</p>
+                    <p>}</p>
+                    <p>&lt;/style&gt;</p>
+                </div>
+                <p>Add this inside <strong>&lt;head&gt;</strong> tag in your HTML file.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">💡 You can also use:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>External CSS</strong>: separate file (style.css)</li>
+                    <li><strong>Inline CSS</strong>: inside tag (not recommended)</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 4: JavaScript – Making Things Work</h2>
+                <p>JavaScript brings interactivity to your site.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🧠 Example: Alert on Click</h3>
+                <div class="code-block">
+                    <p>&lt;button onclick="sayHello()"&gt;Click Me&lt;/button&gt;</p>
+                    <p>&lt;script&gt;</p>
+                    <p>function sayHello() {</p>
+                    <p class="ml-4">alert("Hello, welcome!");</p>
+                    <p>}</p>
+                    <p>&lt;/script&gt;</p>
+                </div>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🔁 Example: Change Text</h3>
+                <div class="code-block">
+                    <p>&lt;p id="message"&gt;Original text&lt;/p&gt;</p>
+                    <p>&lt;button onclick="changeText()"&gt;Change&lt;/button&gt;</p>
+                    <p>&lt;script&gt;</p>
+                    <p>function changeText() {</p>
+                    <p class="ml-4">document.getElementById("message").innerText = "Text changed!";</p>
+                    <p>}</p>
+                    <p>&lt;/script&gt;</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 5: Responsive Design with CSS</h2>
+                <p>Use media queries to make your site mobile-friendly.</p>
+                <div class="code-block">
+                    <p>@media (max-width: 600px) {</p>
+                    <p class="ml-4">body {</p>
+                    <p class="ml-8">background-color: lightgray;</p>
+                    <p class="ml-4">}</p>
+                    <p>}</p>
+                </div>
+                <p>Use frameworks like <strong>Tailwind CSS</strong> or <strong>Bootstrap</strong> for faster styling.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 6: Build a Complete Website</h2>
+                <h3 class="text-xl font-semibold mb-2">🧱 Sections:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Header</li>
+                    <li>About</li>
+                    <li>Services</li>
+                    <li>Contact</li>
+                </ul>
+                <p class="mt-2">We'll build this in a full template (I'll give you the code for print and use).</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="data-science" class="course-content">
+        <button class="close-btn" onclick="hideCourse('data-science')"><i class="fas fa-times"></i></button>
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-6 gradient-text">Data Science with Python</h1>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 1: What is Data Science?</h2>
+                <p>Data science combines mathematics, statistics, programming, and domain knowledge to analyze and understand complex data.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">Key Concepts:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Data Analysis</strong> – Understanding data using charts, graphs, and stats.</li>
+                    <li><strong>Data Visualization</strong> – Making data easy to understand with visuals.</li>
+                    <li><strong>Machine Learning</strong> – Teaching computers to make decisions.</li>
+                    <li><strong>Big Data</strong> – Working with large datasets from many sources.</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 2: Why Learn Data Science?</h2>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>High-demand job with top salaries.</li>
+                    <li>Helps companies make smarter decisions.</li>
+                    <li>Used in healthcare, finance, marketing, tech, and more.</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 3: Tools and Languages You'll Use</h2>
+                <table>
+                    <tr>
+                        <th>Tool/Language</th>
+                        <th>Use Case</th>
+                    </tr>
+                    <tr>
+                        <td>Python</td>
+                        <td>Main language for data analysis & ML</td>
+                    </tr>
+                    <tr>
+                        <td>Pandas</td>
+                        <td>Handling and cleaning data</td>
+                    </tr>
+                    <tr>
+                        <td>NumPy</td>
+                        <td>Math and arrays</td>
+                    </tr>
+                    <tr>
+                        <td>Matplotlib</td>
+                        <td>Plotting graphs</td>
+                    </tr>
+                    <tr>
+                        <td>Seaborn</td>
+                        <td>Beautiful statistical visualizations</td>
+                    </tr>
+                    <tr>
+                        <td>Scikit-learn</td>
+                        <td>Machine learning</td>
+                    </tr>
+                    <tr>
+                        <td>Jupyter</td>
+                        <td>Interactive notebooks for code and notes</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 4: Python for Data Science</h2>
+                <h3 class="text-xl font-semibold mb-2">Getting Started:</h3>
+                <div class="code-block">
+                    <p>import pandas as pd</p>
+                    <p>import numpy as np</p>
+                    <p>import matplotlib.pyplot as plt</p>
+                    <p># Sample Data</p>
+                    <p>data = {'Name': ['Ali', 'Zainab', 'Ahmed'],</p>
+                    <p class="ml-8">'Score': [85, 92, 78]}</p>
+                    <p>df = pd.DataFrame(data)</p>
+                    <p>print(df)</p>
+                    <p>df.plot(kind='bar', x='Name', y='Score')</p>
+                    <p>plt.show()</p>
+                </div>
+                <p>This code creates a bar chart of scores for three students.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 5: Steps in a Data Science Project</h2>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li>Understand the Problem</li>
+                    <li>Collect Data</li>
+                    <li>Clean the Data (handle missing values, errors)</li>
+                    <li>Explore the Data (charts, summaries)</li>
+                    <li>Model the Data (using machine learning)</li>
+                    <li>Evaluate the Model (accuracy, precision, recall)</li>
+                    <li>Deploy or Report the Results</li>
+                </ol>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 6: Data Cleaning with Pandas</h2>
+                <div class="code-block">
+                    <p>import pandas as pd</p>
+                    <p>df = pd.read_csv("data.csv")</p>
+                    <p>df.dropna()           # Remove missing rows</p>
+                    <p>df.fillna(0)          # Fill missing values with 0</p>
+                    <p>df['Age'] = df['Age'].astype(int)  # Convert to int</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 7: Data Visualization with Matplotlib</h2>
+                <div class="code-block">
+                    <p>import matplotlib.pyplot as plt</p>
+                    <p>x = ['Math', 'Science', 'English']</p>
+                    <p>y = [90, 85, 78]</p>
+                    <p>plt.bar(x, y)</p>
+                    <p>plt.title("Student Scores")</p>
+                    <p>plt.xlabel("Subjects")</p>
+                    <p>plt.ylabel("Scores")</p>
+                    <p>plt.show()</p>
+                </div>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 8: Introduction to Machine Learning</h2>
+                <p>Machine learning allows computers to learn from data without being explicitly programmed.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">Types of ML:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Supervised Learning</strong> – You have input and output (e.g., predicting house price).</li>
+                    <li><strong>Unsupervised Learning</strong> – You have input only (e.g., grouping customers).</li>
+                    <li><strong>Reinforcement Learning</strong> – Learning by trial and error.</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 9: Simple Machine Learning Example</h2>
+                <div class="code-block">
+                    <p>from sklearn.linear_model import LinearRegression</p>
+                    <p>import numpy as np</p>
+                    <p># Data: Study Hours vs. Exam Scores</p>
+                    <p>x = np.array([[2], [4], [6], [8]])</p>
+                    <p>y = np.array([50, 60, 70, 80])</p>
+                    <p>model = LinearRegression()</p>
+                    <p>model.fit(x, y)</p>
+                    <p>predicted = model.predict([[10]])</p>
+                    <p>print("Predicted score for 10 hours:", predicted[0])</p>
+                </div>
+                <p>Output: <strong>90</strong> – If you study for 10 hours, you might score 90!</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 10: Real-World Data Projects Ideas</h2>
+                <table>
+                    <tr>
+                        <th>Project Idea</th>
+                        <th>Goal</th>
+                    </tr>
+                    <tr>
+                        <td>COVID-19 Tracker</td>
+                        <td>Analyze cases/deaths globally</td>
+                    </tr>
+                    <tr>
+                        <td>Student Performance Analyzer</td>
+                        <td>Predict exam results</td>
+                    </tr>
+                    <tr>
+                        <td>Ecommerce Data Explorer</td>
+                        <td>Understand product sales</td>
+                    </tr>
+                    <tr>
+                        <td>Twitter Sentiment Analysis</td>
+                        <td>Detect emotions in tweets</td>
+                    </tr>
+                    <tr>
+                        <td>House Price Predictor</td>
+                        <td>Predict price using features</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 11: Where to Practice and Learn</h2>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Kaggle.com</strong> – Free datasets and competitions</li>
+                    <li><strong>Google Colab</strong> – Free cloud notebooks</li>
+                    <li><strong>UCI ML Repository</strong> – Public data sets</li>
+                    <li><strong>Coursera / edX / Udemy</strong> – Affordable courses</li>
+                    <li><strong>YouTube</strong> – Great tutorials (e.g. freeCodeCamp, Codebasics)</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 12: Careers in Data Science</h2>
+                <table>
+                    <tr>
+                        <th>Role</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Data Analyst</td>
+                        <td>Analyzes and reports business data</td>
+                    </tr>
+                    <tr>
+                        <td>Data Scientist</td>
+                        <td>Builds predictive models and interprets trends</td>
+                    </tr>
+                    <tr>
+                        <td>ML Engineer</td>
+                        <td>Builds scalable machine learning systems</td>
+                    </tr>
+                    <tr>
+                        <td>AI Researcher</td>
+                        <td>Works on advanced algorithms and neural nets</td>
+                    </tr>
+                </table>
+                <p class="mt-4">💼 These careers often pay $80,000 to $150,000+ annually.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="cybersecurity" class="course-content">
+        <button class="close-btn" onclick="hideCourse('cybersecurity')"><i class="fas fa-times"></i></button>
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl font-bold mb-6 gradient-text">Cybersecurity: From Beginner to Advanced</h1>
+            <p class="mb-8">Cybersecurity means protecting systems, networks, and data from attacks. It's one of the most important careers in tech today.</p>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 1: Introduction to Cybersecurity</h2>
+                <h3 class="text-xl font-semibold mb-2">What is Cybersecurity?</h3>
+                <p>Cybersecurity is the practice of defending computers, servers, mobile devices, networks, and data from malicious attacks. It includes:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Preventing hacking</li>
+                    <li>Securing personal and business data</li>
+                    <li>Protecting systems from malware, viruses, and phishing</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">Why is it Important?</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Every company today stores digital information.</li>
+                    <li>Hackers attack millions of users and businesses daily.</li>
+                    <li>Cybercrime damages can cost trillions of dollars yearly.</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 2: Types of Cybersecurity</h2>
+                <table>
+                    <tr>
+                        <th>Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Network Security</td>
+                        <td>Protecting networks from unauthorized access.</td>
+                    </tr>
+                    <tr>
+                        <td>Application Security</td>
+                        <td>Securing software applications during development.</td>
+                    </tr>
+                    <tr>
+                        <td>Information Security</td>
+                        <td>Protecting the integrity and privacy of data.</td>
+                    </tr>
+                    <tr>
+                        <td>Operational Security</td>
+                        <td>Managing permissions and user access.</td>
+                    </tr>
+                    <tr>
+                        <td>Disaster Recovery</td>
+                        <td>Responding and recovering from cyberattacks or crashes.</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 3: Common Threats & Attacks</h2>
+                <table>
+                    <tr>
+                        <th>Threat Type</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>Phishing</td>
+                        <td>Fake emails/websites to steal information.</td>
+                    </tr>
+                    <tr>
+                        <td>Malware</td>
+                        <td>Software designed to harm systems.</td>
+                    </tr>
+                    <tr>
+                        <td>Ransomware</td>
+                        <td>Locking files and asking for payment.</td>
+                    </tr>
+                    <tr>
+                        <td>Man-in-the-Middle</td>
+                        <td>Intercepting data between two systems.</td>
+                    </tr>
+                    <tr>
+                        <td>SQL Injection</td>
+                        <td>Inserting code into databases to steal data.</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 4: Basic Cyber Hygiene</h2>
+                <p>To protect yourself and others:</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Use strong passwords (use password managers)</li>
+                    <li>Enable two-factor authentication (2FA)</li>
+                    <li>Keep your software updated</li>
+                    <li>Avoid clicking suspicious links</li>
+                    <li>Use antivirus and firewalls</li>
+                </ul>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 5: Important Tools in Cybersecurity</h2>
+                <table>
+                    <tr>
+                        <th>Tool</th>
+                        <th>Use</th>
+                    </tr>
+                    <tr>
+                        <td>Wireshark</td>
+                        <td>Network analysis/sniffing tool</td>
+                    </tr>
+                    <tr>
+                        <td>Nmap</td>
+                        <td>Network scanning for open ports</td>
+                    </tr>
+                    <tr>
+                        <td>Burp Suite</td>
+                        <td>Web app vulnerability scanner</td>
+                    </tr>
+                    <tr>
+                        <td>Metasploit</td>
+                        <td>Penetration testing framework</td>
+                    </tr>
+                    <tr>
+                        <td>Kali Linux</td>
+                        <td>OS with built-in hacking and security tools</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 6: Ethical Hacking & Penetration Testing</h2>
+                <p>Ethical hackers (aka white hats) help organizations find vulnerabilities before criminals do.</p>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">Phases of Pen Testing:</h3>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li><strong>Reconnaissance</strong> – Collecting information</li>
+                    <li><strong>Scanning</strong> – Finding open ports or flaws</li>
+                    <li><strong>Gaining Access</strong> – Exploiting weaknesses</li>
+                    <li><strong>Maintaining Access</strong> – Checking if attacker can stay inside</li>
+                    <li><strong>Covering Tracks</strong> – Cleaning logs, etc.</li>
+                </ol>
+                <p class="mt-2">These steps are used for learning & protecting – not attacking.</p>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 7: Careers in Cybersecurity</h2>
+                <h3 class="text-xl font-semibold mb-2">🧑‍💻 Common Roles:</h3>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>Security Analyst</strong> – Monitors and defends systems</li>
+                    <li><strong>Penetration Tester</strong> – Tests systems for weaknesses</li>
+                    <li><strong>SOC Analyst</strong> – Works in Security Operation Centers</li>
+                    <li><strong>Incident Responder</strong> – Handles breaches and attacks</li>
+                </ul>
+                
+                <h3 class="text-xl font-semibold mt-4 mb-2">🏆 Top Certifications:</h3>
+                <table>
+                    <tr>
+                        <th>Cert</th>
+                        <th>Description</th>
+                    </tr>
+                    <tr>
+                        <td>CompTIA Security+</td>
+                        <td>Entry-level, covers fundamentals</td>
+                    </tr>
+                    <tr>
+                        <td>CEH</td>
+                        <td>Certified Ethical Hacker</td>
+                    </tr>
+                    <tr>
+                        <td>OSCP</td>
+                        <td>Offensive Security Certified Professional</td>
+                    </tr>
+                    <tr>
+                        <td>CISSP</td>
+                        <td>Advanced management-level certification</td>
+                    </tr>
+                </table>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 8: How to Get Started in Cybersecurity</h2>
+                <ol class="list-decimal pl-5 space-y-1">
+                    <li><strong>Learn the Basics:</strong> Networking, Linux, web security</li>
+                    <li><strong>Set Up a Lab:</strong> Use virtual machines or Kali Linux</li>
+                    <li><strong>Practice:</strong> Try HackTheBox, TryHackMe, CTF (Capture The Flag)</li>
+                    <li><strong>Study:</strong> Books, free YouTube content, paid courses</li>
+                    <li><strong>Certify:</strong> Choose beginner-friendly certifications</li>
+                    <li><strong>Build Your Resume:</strong> Document all your learning & labs</li>
+                </ol>
+            </div>
+            
+            <div class="note-box">
+                <h2 class="text-2xl font-semibold mb-4">🔹 Chapter 9: Best Free Learning Platforms</h2>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li><strong>TryHackMe</strong> – beginner friendly</li>
+                    <li><strong>Hack The Box</strong></li>
+                    <li><strong>OverTheWire</strong></li>
+                    <li><strong>Cybrary</strong></li>
+                    <li><strong>YouTube Channels:</strong> NetworkChuck, The Cyber Mentor, John Hammond.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Mobile menu toggle
+        document.getElementById('mobile-menu-button').addEventListener('click', function() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        });
+
+        // Animate chatbot section when scrolled to
+        const chatbotSection = document.getElementById('ai');
+        const chatbot = document.getElementById('chatbot');
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    chatbot.classList.add('active');
+                }
+            });
+        }, {threshold: 0.1});
+        
+        observer.observe(chatbotSection);
+
+        // Chatbot functionality
+        function askQuestion(type) {
+            // Hide initial message
+            document.getElementById('chat-messages').style.display = 'none';
+            
+            // Show the appropriate response
+            if (type === 'developer') {
+                document.getElementById('developer-response').classList.add('active');
+                document.getElementById('website-response').classList.remove('active');
+            } else if (type === 'website') {
+                document.getElementById('website-response').classList.add('active');
+                document.getElementById('developer-response').classList.remove('active');
+            }
+        }
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                // Close mobile menu if open
+                document.getElementById('mobile-menu').classList.add('hidden');
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+        
+        // Show course content
+        function showCourse(courseId) {
+            document.getElementById(courseId).style.display = 'block';
+            document.body.style.overflow = 'hidden';
+        }
+        
+        // Hide course content
+        function hideCourse(courseId) {
+            document.getElementById(courseId).style.display = 'none';
+            document.body.style.overflow = 'auto';
+        }
+    </script>
+</body>
+</html>
